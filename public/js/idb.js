@@ -15,6 +15,7 @@ request.onsuccess = function(event) {
 
     //is app online?
     if(navigator.onLine) {
+        console.log("Navigator is working!")
         uploadTransaction();
 
     }

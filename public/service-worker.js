@@ -1,3 +1,4 @@
+// importScripts('./js/idb.js');
 const APP_PREFIX = 'MyBudget-';     
 const VERSION = 'version_01';
 const CACHE_NAME = APP_PREFIX + VERSION;
