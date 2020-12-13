@@ -25,8 +25,7 @@ This application is deployed to Heroku: https://my-budget-2020.herokuapp.com/
 <img src="budget-tracker.png">
 
 ## Contributing
-Jesus Manteca <br>
-Brandi Curley
+
 
 ## Tests
 
