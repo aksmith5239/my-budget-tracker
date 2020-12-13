@@ -2,8 +2,9 @@
 let db;
 
 //open connection and set to db verion 1
-const request = indexedDB.open('budget', 1);
+const request = indexedDB.open('budget_tracker', 1);
 
+//add the object store
 request.onupgradeneeded = function(event) {
     const db = event.target.result;
     db.createObjectStore('new_transaction', {autoIncrement: true});
@@ -12,10 +13,8 @@ request.onupgradeneeded = function(event) {
 //on successful entry
 request.onsuccess = function(event) {
     db = event.target.result;
-
     //is app online?
     if(navigator.onLine) {
-        console.log("Navigator is working!")
         uploadTransaction();
 
     }
@@ -34,12 +33,12 @@ function saveRecord(record) {
 };
 
 function uploadTransaction() {
-    const transaction = db.transaction(['new_transaction'], 'readwrite')
+    const transaction = db.transaction(['new_transaction'], 'readwrite');
     const transactionsObjectStore = transaction.objectStore('new_transaction');
     const getAll = transactionsObjectStore.getAll();
     
     getAll.onsuccess = function(){
-        if(getAll.result.lenth > 0) {
+        if(getAll.result.length > 0) {
             fetch('/api/transaction', {
                 method: "POST",
                 body: JSON.stringify(getAll.result),
@@ -53,11 +52,11 @@ function uploadTransaction() {
                 if(serverResponse.message) {
                     throw new Error(serverResponse);
                 }
-                //open one more transaction
+//                 //open one more transaction
                 const transaction = db.transaction(['new_transaction'], 'readwrite' );
-                //access new transaction object store
+//                 //access new transaction object store
                 const transactionsObjectStore = transaction.objectStore('new_transaction');
-                //clear store
+//                 //clear store
                 transactionsObjectStore.clear();
 
                 alert('All transactions have been uploaded');
