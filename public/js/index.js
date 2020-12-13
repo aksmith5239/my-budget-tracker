@@ -142,7 +142,6 @@ function sendTransaction(isAdding) {
     // clear form
     nameEl.value = "";
     amountEl.value = "";
-    alert("We got to the saveRecord function");
   });
 }
 
